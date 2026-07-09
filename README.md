@@ -54,7 +54,7 @@ PE-MobileNet-Mulberry/
 
 The cleaned mulberry leaf dataset (1004 images, 512×512 px) is archived on **Zenodo** (CC0 1.0).
 
-> **Review access**: [Click here to access the dataset (Zenodo Anonymous Link)](https://www.google.com/search?q=https://zenodo.org/records/21261479%3Fpreview%3D1%26token%3DeyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjE1ODg1YThkLTNmNmQtNGQ2Ny1hMjA5LWFkNzc3Y2NlNzc5MyIsImRhdGEiOnt9LCJyYW5kb20iOiJjYTcyOTAyOWI2NGQ5NTZjNzMyY2NmM2Y4N2IwMjU2MCJ9.coZnyyEeHTUu2tB23IT0Tj7VZEu1Rr0N3DnehcQWI7VmCJGkiqo70D-9A-FiuWdVgWqAtdbMCQ8_Bf2fNHvEHA)
+> **Review access**: [Click here to access the dataset (Zenodo Anonymous Link)](https://zenodo.org/records/21261479?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjE1ODg1YThkLTNmNmQtNGQ2Ny1hMjA5LWFkNzc3Y2NlNzc5MyIsImRhdGEiOnt9LCJyYW5kb20iOiJjYTcyOTAyOWI2NGQ5NTZjNzMyY2NmM2Y4N2IwMjU2MCJ9.coZnyyEeHTUu2tB23IT0Tj7VZEu1Rr0N3DnehcQWI7VmCJGkiqo70D-9A-FiuWdVgWqAtdbMCQ8_Bf2fNHvEHA)
 
 > **Permanent DOI**: 10.5281/zenodo.21261479 *(will be activated upon publication)*
 
