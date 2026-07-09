@@ -24,8 +24,6 @@ audit tools (pHash pipeline & DSRCT spreadsheet), and lightweight model
 ---
 
 ## Repository Structure
-
-```
 PE-MobileNet-Mulberry/
 ├── README.md
 ├── LICENSE                     # MIT (code)
