@@ -19,7 +19,7 @@ Code: MIT License
 ## Citation
 
 If you use these resources, please cite our paper:
-[待论文发表后填入完整引用]
+[]
 
 ## DOI
 
