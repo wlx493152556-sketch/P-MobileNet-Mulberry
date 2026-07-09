@@ -41,7 +41,7 @@ PE-MobileNet-Mulberry/
 │   ├── phash_audit.py          # pHash-based near-duplicate detection
 │   └── README_audit.md         # Instructions for the audit pipeline
 ├── dsrct_tool/
-│   ├── DSRCT_spreadsheet.xlsx  # Excel tool for discrete sample reverse consistency test
+│   ├── DSRCT_Tool.xlsx  # Excel tool for discrete sample reverse consistency test
 │   └── README_DSRCT.md         # Quick start for the DSRCT tool
 └── app/
     ├── my_gradio.py            # Online diagnostic prototype
@@ -126,7 +126,7 @@ For detailed instructions, see `audit/README_audit.md`.
 The Discrete Sample Reverse Consistency Test (DSRCT) spreadsheet
 checks arithmetic self‑consistency of reported accuracy metrics.
 
-* Open `dsrct_tool/DSRCT_spreadsheet.xlsx`
+* Open `dsrct_tool/DSRCT_Tool.xlsx`
 * Fill in the four green cells (sample size, decimal places, model names, reported values)
 * The tool instantly flags any inconsistency
 
