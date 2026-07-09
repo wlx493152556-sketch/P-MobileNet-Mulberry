@@ -45,7 +45,6 @@ PE-MobileNet-Mulberry/
 └── app/
     ├── my_gradio.py            # Online diagnostic prototype
     └── weights/                # Place pre-trained weights here
-```
 
 ---
 
@@ -155,4 +154,5 @@ If you use these resources in your research, please cite our paper
 ## Contact
 
 For questions or issues, please open an issue on this repository or contact the corresponding author.
+```
 ```
