@@ -2,8 +2,7 @@
 
 Official reproducible resources for the paper:
 
-**Trustworthy Evaluation for Mulberry Leaf Disease Recognition: Perceptual
-Hash Auditing and an Ultra-Lightweight Model**
+**Trustworthy Evaluation for Mulberry Leaf Disease Recognition: Dataset Auditing and an Ultra-Lightweight Model**
 
 Lingxiao Weng, 2026
 
