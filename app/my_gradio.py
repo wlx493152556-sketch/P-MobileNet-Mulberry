@@ -1,6 +1,6 @@
 import os
 import io
-import time  # 引入时间模块用于测速
+import time
 import torch
 import torch.nn as nn
 from torchvision import transforms
@@ -10,7 +10,7 @@ import gradio as gr
 torch.set_num_threads(1)
 
 # ==========================================
-# 1. Network Architecture (PE-MobileNet)
+# 1. Network Architecture (P-MobileNet)
 # ==========================================
 class PConv(nn.Module):
     def __init__(self, dim, ratio=0.25):
@@ -25,21 +25,6 @@ class PConv(nn.Module):
         x1, x2 = torch.split(x, [self.dim_conv, self.dim_untouched], dim=1)
         x1 = self.act(self.bn(self.conv(x1)))
         return torch.cat((x1, x2), dim=1)
-
-class ECA(nn.Module):
-    def __init__(self, channels):
-        super().__init__()
-        self.gap = nn.AdaptiveAvgPool2d(1)
-        k = 5  
-        self.conv = nn.Conv1d(1, 1, kernel_size=k, padding=k // 2, bias=False)
-        self.sigmoid = nn.Sigmoid()
-
-    def forward(self, x):
-        y = self.gap(x)
-        y = y.squeeze(-1).transpose(-1, -2)
-        y = self.conv(y)
-        y = y.transpose(-1, -2).unsqueeze(-1)
-        return x * self.sigmoid(y)
 
 class InvertedResidual(nn.Module):
     def __init__(self, inp, oup, stride, expand_ratio, use_pconv=False, use_eca=False):
@@ -122,18 +107,21 @@ class ProposedMobileNetV2(nn.Module):
 # 2. Model Initialization & Weights Loading
 # ==========================================
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
+# Instantiate P-MobileNet (t=3, PConv,)
+model = ProposedMobileNetV2(num_classes=3, width_mult=0.25,
+                            expand_ratio=3, use_pconv=True, use_eca=False)
 
-# Instantiate PE-MobileNet (t=3, use_pconv=True, use_eca=True)
-model = ProposedMobileNetV2(num_classes=3, width_mult=0.25, expand_ratio=3, use_pconv=True, use_eca=True)
-
-WEIGHT_PATH = "/openbayes/home/系统/best_Proposed_(t=3+P+E)_fold4.pth"
+WEIGHT_PATH = "/openbayes/home/系统/best_t=3+PConv_fold1.pth"
 
 if os.path.exists(WEIGHT_PATH):
-    checkpoint = torch.load(WEIGHT_PATH, map_location=DEVICE)
+    checkpoint = torch.load(WEIGHT_PATH, map_location=DEVICE, weights_only=True)
     model.load_state_dict(checkpoint)
-    print(f"Successfully loaded best model weights: {WEIGHT_PATH}")
+    print(f"Successfully loaded P-MobileNet weights: {WEIGHT_PATH}")
 else:
-    print(f"⚠️ Warning: Weight file not found at {WEIGHT_PATH}. Using un-trained initial weights!")
+    raise FileNotFoundError(
+        f"❌ Weight file not found at {WEIGHT_PATH}. "
+        f"Place 'best_P-MobileNet_fold1.pth' under app/weights/ before launch."
+    )
 
 model.to(DEVICE)
 model.eval()
@@ -160,12 +148,12 @@ def predict_mulberry(image):
     # Preprocessing
     img_tensor = inference_transform(image).unsqueeze(0).to(DEVICE)
     
-    # Warm up & Inference with precise timing
+    # Warm up one forward pass (excluded from timing) to avoid cold-start bias
     with torch.no_grad():
-        # Optional GPU synchronization for precise timing if using CUDA
+        _ = model(img_tensor)
         if DEVICE == 'cuda':
             torch.cuda.synchronize()
-        
+
         start_time = time.perf_counter()
         outputs = model(img_tensor)
         probabilities = torch.nn.functional.softmax(outputs[0], dim=0)
@@ -186,10 +174,10 @@ def predict_mulberry(image):
 # 5. Internationalized Gradio UI Layout
 # ==========================================
 with gr.Blocks(theme=gr.themes.Soft(), 
-               title="PE-MobileNet Mulberry Disease Diagnosis",
+               title="P-MobileNet Mulberry Disease Diagnosis",
                css="footer {display: none !important;}") as demo:
     gr.Markdown("**Mulberry Leaf Disease Diagnosis System**")
-    gr.Markdown("powered by PE-MobileNet")
+    gr.Markdown("powered by P-MobileNet")
     
     with gr.Row():
         with gr.Column():
