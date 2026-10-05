@@ -1,6 +1,3 @@
----
-
-```markdown
 # P-MobileNet-Mulberry
 
 Official reproducible resources for the paper:
@@ -22,7 +19,7 @@ paper. It enables full reproduction of:
 
 ## Repository Structure
 
-```
+
 P-MobileNet-Mulberry/
 ├── README.md
 ├── LICENSE                     # MIT (code and weights)
@@ -41,7 +38,7 @@ P-MobileNet-Mulberry/
 └── app/
     ├── my_gradio.py            # Online diagnostic prototype
     └── weights/                # Place pre-trained weights here
-```
+
 
 ## Getting the Cleaned Dataset
 
