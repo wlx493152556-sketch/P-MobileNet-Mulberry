@@ -26,6 +26,7 @@ P-MobileNet-Mulberry/
 ├── requirements.txt
 ├── data/
 │   ├── README_data.md          # How to obtain the cleaned dataset
+│   ├── split_index.csv         # Train/test split and 5-fold assignment (for inspection only)
 │   └── removed_image_index.csv     # List of 96 removed images with reasons
 ├── models/
 │   ├── ablation.py             # Ablation study training & evaluation
@@ -66,7 +67,7 @@ pip install -r requirements.txt
 ```
 
 Note: PyTorch may need a custom install depending on your CUDA version.
-See pytorch.org for instructions.
+as described in Section 3.1 of the paper.
 
 ## Usage
 
@@ -84,6 +85,16 @@ as described in the paper.
   `python models/cpu_benchmark.py`
 
 All results are printed to the console and averaged over 5 folds.
+
+The train/test split and the 5-fold assignment are generated **deterministically
+in code** — `sorted(glob(...))` per class folder, then
+`train_test_split(random_state=42)` and
+`StratifiedKFold(n_splits=5, shuffle=True, random_state=42)`, as described in
+Section 3.1. The training scripts do not read any split file.
+
+`data/split_index.csv` records the resulting assignment (995 rows:
+`file, class, split, fold`) for inspection only; it can be regenerated from the
+procedure above, and deleting it does not change the results.
 
 ### 2. Running the Dataset Audit
 
