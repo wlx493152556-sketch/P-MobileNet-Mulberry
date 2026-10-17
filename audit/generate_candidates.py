@@ -16,7 +16,7 @@ from PIL import Image, ImageOps, ImageDraw, ExifTags
 import imagehash
 
 DATASET_PATH = "/openbayes/input/input0"
-CACHE_NPZ    = "embeddings_cache_v2.npz"
+CACHE_NPZ    = "embeddings_dinov2_vits14_orig1091.npz"
 OUT_CSV      = "candidates.csv"
 OUT_VIS      = "candidates_vis"
 
